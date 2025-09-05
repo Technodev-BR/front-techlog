@@ -1,0 +1,55 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Editar Fornecedor</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+
+        <div class="alert alert-danger" id="editar-error-fornecedores-generico" style="display:none;" role="alert">
+            <span id="editar-error-fornecedores-generico-text"></span>
+        </div>
+
+        <div class="row mt-2 m-0 p-0">
+            <div class="col-8 ps-0">
+                <label for="nome">Nome</label><small style="color:red;">*</small>
+                <input type="text" name="nome" class="form-control" id="editar-fornecedores-nome" placeholder="digite um nome" >
+                <span class="editar-error-fornecedores text-danger" id="editar-error-fornecedores-nome"></span>
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label><small style="color:red;">*</small>
+                <input type="text" id="editar-fornecedores-id" name="id" class="form-control" readonly="readonly" >
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="editar-fornecedores-email" placeholder="digite um email" >
+            <span class="editar-error-fornecedores text-danger" id="editar-error-fornecedores-email"></span>
+        </div>
+
+        <div class="mt-3 form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="editar-fornecedores-recebe_email">
+            <label class="form-check-label" for="editar-fornecedores-recebe_email">Recebe email</label>
+        </div>
+
+        <div class="my-3">
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" autocomplete="off" id="editar-fornecedores-telefone" class="form-control" placeholder="digite um telefone" >
+            <span class="editar-error-fornecedores text-danger" id="editar-error-fornecedores-telefone"></span>
+        </div>
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="editar_fornecedores()">Confimar</button>
+    </div>
+
+{% endblock %}

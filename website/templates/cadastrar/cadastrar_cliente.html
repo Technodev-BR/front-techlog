@@ -1,0 +1,79 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Cadastrar Cliente</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+            
+        <div class="alert alert-danger" id="cadastrar-error-clientes-generico" style="display:none;" role="alert">
+            <span id="cadastrar-error-clientes-generico-text"></span>
+        </div>
+      
+        <div class="mt-2">
+            <label for="nome_fantasia">Nome</label><small style="color:red;">*</small>
+            <input type="text" name="nome" autocomplete="off" id="cadastrar-clientes-nome_fantasia" class="form-control" placeholder="digite um nome" >
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-nome_fantasia"></span>
+        </div>
+
+        <div class="mt-3">
+            <label for="razao_social">Razão Social</label><small style="color:red;">*</small>
+            <input type="text" name="razao_social" id="cadastrar-clientes-razao_social" class="form-control" placeholder="digite uma razao_social">
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-razao_social"></span>
+        </div>  
+
+        <div class="mt-3">
+            <label for="cnpj">CNPJ</label><small style="color:red;">*</small>
+            <input type="text" name="cnpj" class="form-control" id="cadastrar-clientes-cnpj" maxlength="18" placeholder="digite um cnpj">
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-cnpj"></span>
+        </div>
+
+        <div class="mt-3">
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" class="form-control" id="cadastrar-clientes-telefone" placeholder="digite um telefone">
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-telefone"></span>
+        </div>
+       
+        <div class="mt-3">
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control" id="cadastrar-clientes-email" placeholder="digite um email" >
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-email"></span>
+        </div>
+
+        <div class="mt-3 form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="cadastrar-clientes-recebe_email">
+            <label class="form-check-label" for="cadastrar-clientes-recebe_email">Recebe email</label>
+        </div>
+
+        <div class="mt-3">
+            <label for="uf">Estado UF</label>
+            <input type="text" name="uf" class="form-control" id="cadastrar-clientes-uf" placeholder="digite um UF de estado ex SP.. " >
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-uf"></span>
+        </div>
+
+        <div class="mt-3">
+            <label for="cidade">Cidade</label>
+            <input type="text" name="cep" class="form-control mt-2" id="cadastrar-clientes-cidade" placeholder="digite uma cidade" >
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-cidade"></span>
+        </div>
+
+        <div class="my-3">
+            <label for="rua">Rua</label>
+            <input type="text" name="rua" class="form-control" id="cadastrar-clientes-rua" placeholder="digite uma rua" >
+            <span class="cadastrar-error-clientes text-danger" id="cadastrar-error-clientes-rua"></span>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="cadastrar_clientes()">Confimar</button>
+    </div> 
+
+{% endblock %}

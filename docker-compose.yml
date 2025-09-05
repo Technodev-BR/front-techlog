@@ -1,0 +1,28 @@
+
+services:
+  application:
+    build:
+      context: .
+      args:
+        ISCAS_VERSION: 1.0.1
+    container_name: APP_ISCAS
+    environment:
+      - DATABASE_USER=postgres
+      - DATABASE_PWD=.9N#tMZip+f~<-h
+      - DATABASE_URL=postgres://postgres:.9N#tMZip+f~<-h@181.215.134.63:30032/controleisca
+    volumes:
+      - ./website:/website
+      - iscas_volume_data:/website/static
+      - iscas_volume_image:/website/uploads
+    env_file:
+      - ./website/.env
+    networks:
+      - jclog-net
+
+networks:
+  jclog-net:
+    external: true
+
+volumes:
+  volume_data: {}
+  volume_image: {}

@@ -1,0 +1,90 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+
+    <h5 class="modal-title">Cadastrar Usuario</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3 row" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+       
+
+    {% comment %} <form id="cadastrar_usuarios_form" method='POST'>
+        {% csrf_token %}
+
+        <div class="modal-body form-group py-3 row" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+            
+            <div class="form-group" id="form-cadastrar-usuarios">
+                
+                <div class="alert alert-danger" id="cadastrar-error-usuarios-generico" style="display:none;" role="alert">
+                    <span id="cadastrar-error-usuarios-generico-text"></span>
+                </div>
+                
+                <div>
+                    <label for="username">Usuario</label><small style="color:red;">*</small>
+                    <input type="text" name="username" autocomplete="off" class="form-control mt-2" placeholder="digite um nome" required >
+                    <span class="cadastrar-error-usuarios text-danger" id="cadastrar-error-usuarios-username"></span>
+                </div>
+
+                <div class="mt-2">
+                    <label for="password">Senha</label><small style="color:red;">*</small>
+                    <input type="password" name="password" onpaste="return false;" autocomplete="off" class="form-control mt-2" placeholder="digite uma senha" required>
+                    <span class="cadastrar-error-usuarios text-danger" id="cadastrar-error-usuarios-password"></span>
+                </div>
+
+                <div class="mt-2">
+                    <label for="roles">Nivel Acesso</label><small style="color:red;">*</small>
+                    <select name="roles" id="cadastrar-usuarios-roles" class="form-control mt-2" required>
+                        <option value="">Selecione uma opção</option>
+                        {% for ROLE in ROLES %}
+                            <option value="{{ROLE}}">{{ ROLE }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="cadastrar-error-usuarios text-danger" id="cadastrar-error-usuarios-roles"></span>
+                </div>
+
+                <div class="mt-2">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" placeholder="digite um email" class="form-control mt-2">
+                    <span class="cadastrar-error-usuarios text-danger" id="cadastrar-error-usuarios-email"></span>
+                </div>
+
+                <div class="mt-2">
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" name="telefone" placeholder="digite telefone ex: 999999999" class="form-control mt-2">
+                    <span class="cadastrar-error-usuarios text-danger" id="cadastrar-error-usuarios-telefone"></span>
+                </div>
+                
+            </div>
+
+            <div class="form-group ps-0 pe-1 col-5" id="form-cadastrar-usuarios-operacoes" style="max-height: 45vh !important; display:none;">
+                
+                <h5 class="mb-0">Operações</h5>
+
+                <div class="mb-2">
+                    <button type="button" class="btn btn-outline-secondary form-control mt-2" style="font-size:.9rem;">
+                        <i class="fa-solid fa-plus"></i><span class="ms-2">Adicionar Operação</span>
+                    </button>
+                </div>
+
+                <ul class="list-group" style="max-height: 100% !important; overflow-y: auto;">
+                    <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size:.8rem;">
+                        <span style="overflow: hidden; text-overflow: ellipsis;">asusaaaaaaaaaaaaaaaaaaaaaa </span>
+                        <i class="fa-solid fa-trash" style="color: #df3030;"></i>
+                    </li>
+                </ul>
+
+            </div>
+
+        </div> {% endcomment %}
+    </div> 
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="cadastrar_usuarios()">Confimar</button>
+    </div> 
+
+{% endblock %}  

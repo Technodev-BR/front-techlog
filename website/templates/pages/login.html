@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="author" content="J&C - GESTÂO DE RISCO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="J&C, Logistica, Serviços, Gestão de Riscos, Inteligência">
+    <meta name="copyright" content="© 2024 Companhia J&C Gestão de Riscos" />
+    <meta http-equiv="content-language" content="pt-br, en-US, fr" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" /> 
+
+    <!-- Bootstrap -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="{% static 'lib/jquery/jquery.js' %}" ></script>
+    <link href="{% static 'lib/datatables/datatables.css' %}" rel="stylesheet">
+    <script src="{% static 'lib/datatables/datatables.js' %}"></script>
+
+    <!-- FontAwesomeFree Css -->
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+      
+    <!-- Css -->
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'css/global/default.css' %}" rel="stylesheet">
+   
+   
+    <title>Controle de Iscas - Login</title>
+</head>
+<body>
+    <main class="login-main">
+
+        <header class="login-header">
+         
+        </header>
+
+        <section class="login-section">
+
+            <h2><span>Realizar</span> login</h2> 
+
+            {% if request == 'POST' and form.error_messages %}
+                <div class="alert alert-warning" role="alert">
+                    <p>Nome de Usuario ou Senha Incorretos!</p>
+                </div>
+            {% endif %}
+
+            <form method="POST" id="form">
+                
+                {% csrf_token %}
+
+                <div class="container-text">
+                    <label for="username">usuario</label>
+                    <input type="text" name="username" id="username" autocomplete="off"  required >
+                </div>
+                
+                <div class="container-text">
+                    <label for="password">senha</label>
+                    <input type="password" name="password" id="password" onpaste="return false;" autocomplete="off"  required>
+                </div>
+
+                <button class="button" type="submit">Entrar</button>
+
+                <a href="#">Esqueceu a Senha?</a>
+            </form>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container d-flex justify-content-center align-content-center">
+            <!-- <span>© 2024 Companhia&nbsp;J&amp;C Gestão de Riscos</span> -->
+        </div>
+    </footer>
+
+    <script src="{% static 'js/login.js' %}"></script>
+</body>

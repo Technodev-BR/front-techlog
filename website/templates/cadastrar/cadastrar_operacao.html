@@ -1,0 +1,43 @@
+{% extends 'bases/modal_base.html' %}error
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Cadastrar Operação</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+            
+        <div class="alert alert-danger" id="cadastrar-error-operacoes-generico" style="display:none;" role="alert">
+            <span id="cadastrar-error-operacoes-generico-text"></span>
+        </div>
+        
+        <div class="row mt-2 m-0 p-0">
+            <div class="col-8 ps-0">
+                <label for="nome">Informações do Cliente</label><small style="color:red;">*</small>
+                <input type="text" name="nome" autocomplete="off" id="cadastrar-operacoes-clientes-informacao" class="form-control" readonly="readonly" >
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label><small style="color:red;">*</small>
+                <input type="text" name="id" class="form-control" id="cadastrar-operacoes-clientes-id" readonly="readonly" >
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <label for="nome">Nome</label><small style="color:red;">*</small>
+            <input type="text" name="nome" autocomplete="off" id="cadastrar-operacoes-nome" class="form-control" placeholder="digite o nome da operação" >
+            <span class="cadastrar-error-operacoes text-danger" id="cadastrar-error-operacoes-nome"></span>
+        </div>
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="cadastrar_operacoes()">Confimar</button>
+    </div> 
+
+{% endblock %}

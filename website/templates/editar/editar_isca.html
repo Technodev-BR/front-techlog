@@ -1,0 +1,102 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Editar Isca</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{controller}}_body">
+        {% csrf_token %}
+        
+        <div class="alert alert-danger" id="editar-error-iscas-generico" style="display:none;" role="alert">
+            <span id="editar-error-iscas-generico-text"></span>
+        </div>
+
+        <div class="mt-3 px-3 row">
+            <canvas id="editar-iscas-foto" style="display:none;" width="600" height="460"></canvas>
+        </div>
+
+        <div class="row mt-2 m-0 p-0">
+            <div class="col-8 ps-0">
+                <label for="numero_isca">Numero Isca</label><small style="color:red;">*</small>
+                <input type="text" name="numero_isca" id="editar-iscas-numero_isca" class="form-control" placeholder="digite o numero da isca">    
+                <span class="editar-error-iscas text-danger" id="editar-error-iscas-numero_isca"></span>          
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label><small style="color:red;">*</small>
+                <input type="text" name="id" class="form-control" id="editar-iscas-id" readonly="readonly">
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label for="cadastrante">Cadastrante</label>
+            <input type="text" name="cadastrante" class="form-control" id="editar-iscas-cadastrante" readonly="readonly">
+        </div>
+      
+        <div class="mt-3">
+            <label for="local_cliente">Local</label><small style="color:red;">*</small>
+            <select name="local_cliente" class="form-control" id="editar-iscas-local_cliente">
+                <option value="">selecione uma opção</option>
+                {% for local_cliente in context_locais_clientes %}
+                    <option value="{{local_cliente.id}}">{{ local_cliente.local.nome }} - {{ local_cliente.cliente.nome_fantasia}}</option>
+                {% endfor %}
+            </select>  
+            <span class="editar-error-iscas text-danger" id="editar-error-iscas-local_cliente"></span>    
+        </div>
+       
+        <div class="mt-3">
+            <label for="fornecedor">Fornecedores</label><small style="color:red;">*</small>
+            <select name="fornecedor" class="form-control" id="editar-iscas-fornecedor">
+                <option value="">selecione uma opção</option>
+                {% for fornecedor in context_fornecedores %}
+                    <option value="{{fornecedor.id}}">{{ fornecedor.nome }}</option>
+                {% endfor %}
+            </select>
+            <span class="editar-error-iscas text-danger" id="editar-error-iscas-fornecedor"></span>    
+        </div>
+
+        <div class="mt-3">
+            <label for="comunicacao">Comunicação</label><small style="color:red;">*</small>
+            <select name="comunicacao" class="form-control" id="editar-iscas-comunicacao">
+                <option value="">selecione uma opção</option>
+                {% for comunicacao in context_comunicacoes %}
+                    <option value="{{comunicacao}}">{{ comunicacao }}</option>
+                {% endfor %}
+            </select>
+            <span class="editar-error-iscas text-danger" id="editar-error-iscas-comunicacao"></span>    
+        </div>
+
+        <div class="mt-3">
+            <label for="modelo">Modelo</label><small style="color:red;">*</small>
+            <select name="modelo" class="form-control " id="editar-iscas-modelo">
+                <option value="">selecione uma opção</option>
+                {% for modelo in context_modelos %}
+                    <option value="{{modelo}}">{{ modelo }}</option>
+                {% endfor %}
+            </select>
+            <span class="editar-error-iscas text-danger" id="editar-error-iscas-modelo"></span>    
+        </div>
+    
+        <div class="my-3">
+            <label for="operacao">Operação</label><small style="color:red;">*</small>
+            <select name="operacao" class="form-control"  id="editar-iscas-operacao" required>
+                <option value="">selecione uma opção</option>
+                {% for operacao in context_operacoes %}
+                    <option value="{{operacao.id}}">{{ operacao.cliente.razao_social }} - {{ operacao.nome }}</option>
+                {% endfor %}
+            </select>
+            <span class="editar-error-iscas text-danger" id="editar-error-iscas-operacao"></span>    
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="editar_iscas()">Confimar</button>
+    </div> 
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block styles %} 
+    <link href="{% static 'css/tabela.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} {{ titulo_page }} {% endblock %}
+
+{% block conteudo %}
+
+    <Section class="py-4" > 
+
+        <div class="title-header d-flex flex-row justify-content-between align-items-center fundo-white">
+        
+            {% include 'bases/sub_titulo_base.html' %}
+
+            <div class="title-right">
+                <button type="button" class="button-default" onclick="modal_cadastrar_fornecedores()"> 
+                    <i class="fa-solid fa-plus"></i> <span class="mx-2">Cadastrar</span> 
+                </button>
+            </div>
+            
+        </div>
+
+        {% include 'listar/fornecedor_list.html' %}
+        
+    </section>
+
+    {% include 'bases/alerta_sucesso_base.html' %}
+
+    {% with modal="cadastrar" controller="fornecedores" %}
+        {% include 'cadastrar/cadastrar_fornecedor.html' %}
+    {% endwith %}
+
+    {% with modal="editar" controller="fornecedores" %}
+        {% include 'editar/editar_fornecedor.html' %}
+    {% endwith %}
+
+    {% with modal="excluir" controller="fornecedores" %}
+        {% include 'excluir/excluir_fornecedor.html' %}
+    {% endwith %}
+
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/tabela.js' %}" ></script>
+    <script src="{% static 'js/fornecedor.js' %}" ></script>
+{% endblock %}

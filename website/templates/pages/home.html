@@ -1,0 +1,22 @@
+{% extends 'bases/base.html' %}
+
+{% block styles %} 
+{% load static %}
+
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block title %} {{ titulo_page }} {% endblock %}
+
+{% block conteudo %}
+
+<Section class="container-fluid titulo-home-fundo">
+
+    <h1 class="titulo-home">Bem <span>Vindo</span></h1>
+
+    <p>Clique em uma das opções no menu lateral para começar</p>
+    
+</section>
+
+{% endblock %}

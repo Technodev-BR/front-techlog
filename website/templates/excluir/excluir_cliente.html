@@ -1,0 +1,45 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Deseja realmente remover o cliente ?</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{controller}}_body">
+        {% csrf_token %}
+        
+        <div class="alert alert-danger" id="excluir-error-clientes-generico" style="display:none;" role="alert">
+            <span id="excluir-error-clientes-generico-text"></span>
+        </div>
+
+        <div class="row mt-2 m-0">
+            <div class="col-8 ps-0">
+                <label for="informacao">Informações do Cliente</label>
+                <input type="text" name="informacao" id="excluir-clientes-informacao" autocomplete="off" class="form-control mt-2"  readonly="readonly" >
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label>
+                <input type="text" name="id" id="excluir-clientes-id" class="form-control mt-2" readonly="readonly" required >
+            </div>
+        </div>
+
+        <div class="form-group my-3" >
+            <label for="operacao">Operações Vinculadas</label>
+
+            <ul class="list-group" name="operacao" style="max-height: 50vh !important;overflow-y: auto;">
+            </ul>
+            
+        </div>
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="excluir_clientes()">Confimar</button>
+    </div>
+
+{% endblock %}

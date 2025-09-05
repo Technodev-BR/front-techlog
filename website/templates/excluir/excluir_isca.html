@@ -1,0 +1,38 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Deseja Realmente Remover essa isca ?</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{controller}}_body">
+        {% csrf_token %}
+        <div class="alert alert-danger" id="excluir-error-iscas-generico" style="display:none;" role="alert">
+            <span id="excluir-error-iscas-generico-text"></span>
+        </div>
+
+        <div class="row my-3 m-0">
+            <div class="col-8 ps-0">
+                <label for="informacao">Informações da Isca</label>
+                <input type="text" name="informacao" id="excluir-iscas-informacao"  autocomplete="off" class="form-control"  readonly="readonly" >
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label>
+                <input type="text" name="id" id="excluir-iscas-id" class="form-control" readonly="readonly" >
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="excluir_iscas()">Confimar</button>
+    
+    </div>
+    
+{% endblock %}

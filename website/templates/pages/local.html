@@ -1,0 +1,55 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block styles %} 
+    <link href="{% static 'css/tabela.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} {{ titulo_page }} {% endblock %}
+
+{% block conteudo %}
+
+    <Section class="py-4" > 
+        <div class="title-header d-flex flex-row justify-content-between align-items-center fundo-white">
+    
+            {% include 'bases/sub_titulo_base.html' %}
+
+            <div class="title-right">
+                <button type="button" class="button-default" onclick="modal_cadastrar_locais()"> 
+                    <i class="fa-solid fa-plus"></i> <span class="mx-2">Cadastrar</span> 
+                </button>
+            </div>
+        </div>
+        
+        {% include 'listar/local_list.html' %}
+       
+    </section>
+
+    {% include 'bases/alerta_sucesso_base.html' %}
+    
+    {% include 'bases/alerta_erro_base.html' %}
+    
+    {% with modal="cadastrar" controller="locais" %}
+        {% include 'cadastrar/cadastrar_local.html' %}
+    {% endwith %}
+
+    {% with modal="editar" controller="locais" %}
+        {% include 'editar/editar_local.html' %}
+    {% endwith %}
+
+    {% with modal="adicionar" controller="locais_clientes" %}
+        {% include 'bases/adicionar_cliente_base.html' %}
+    {% endwith %}
+
+    {% with modal="excluir" controller="locais" %}
+        {% include 'excluir/excluir_local.html' %}
+    {% endwith %}
+
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/tabela.js' %}" ></script>
+    <script src="{% static 'js/local.js' %}" ></script>
+{% endblock %}
+
+
+

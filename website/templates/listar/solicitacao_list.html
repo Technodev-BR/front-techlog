@@ -1,0 +1,99 @@
+<section class="py-2 my-3 px-lg-2 fundo-white">
+    <div class="table-responsive mt-1 py-2 px-3">
+        <table class="table tabela-solicitacao align-middle table-borderless" >
+            <thead>
+                <tr class="align-bottom">
+                    <th data-orderable="false">Ativo</th>
+                    <th>Codigo</th>
+                    <th>Numero Isca</th>
+                    <th>Checkin</th>
+                    <th>Checkout</th>
+                    <th>Implantação</th>
+                    <th>Data Criado</th>
+                    <th data-orderable="false">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if solicitacoes_list %}
+                    {% for solicitacao in solicitacoes_list %}
+                        <tr>
+                            <td>
+                                <button class="figure small pe-1">
+                                    <i class="fa-solid fa-circle" style="color: {% if solicitacao.ativo %}rgb(32, 218, 100);{% else %}#ba2525;{% endif %}"></i>
+                                </button>
+                            </td>
+                            <td>{{solicitacao.id | default:"N/A"}}</td> 
+                            <td>
+                                <button class="text-reduzido">
+                                    {{solicitacao.isca.numero_isca | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>
+                                <button class="figure"> 
+                                    <i class="fa-regular fa-clipboard" style="color: {% if solicitacao.checkin == "Checkin Pendente" %}goldenrod !important;{% elif solicitacao.checkin == "Checkin Aprovado" %}#58ca7e;{% else %}rgb(218, 44, 32)!important;{% endif %}"></i>
+                                </button>
+                                <button class="text checkin-solicitacao"> 
+                                    {{solicitacao.checkin | default:"N/A"}}
+                                </button>
+                                {% if solicitacao.checkin == "Checkin Reprovado" %}
+                                    <button type="submit" class="text rotate" > 
+                                        <a href="{% url 'solicitacoes:atualizar_checkin' id=solicitacao.id %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Clique aqui para realizar o checkin novamente">
+                                            <i class="fa-solid fa-rotate"> </i> 
+                                        </a>
+                                    </button>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button class="figure"> 
+                                    <i class="fa-solid fa-clipboard" style="color: {% if solicitacao.checkout == "Checkout Aprovado" %}#58ca7e;{% elif solicitacao.checkout == "Checkout Reprovado" %}rgb(218, 44, 32);{% else %}goldenrod;{% endif %}"></i>
+                                </button>
+                                <button class="text checkout-solicitacao"> 
+                                    {{solicitacao.checkout | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>
+                                <button class="text {% if solicitacao.implantacao == "Pendente" %}marca-pendente{% else %}marca-aprovada{% endif %}">
+                                    {{ solicitacao.implantacao | default:"N/A" }}
+                                </button>
+                            </td>
+                            <td>{{ solicitacao.data_criado | date:"d/m/Y" | default:"N/A" }}</td>
+                            <td>
+                                <button class="icone medium px-3" data-bs-toggle="dropdown"  data-bs-auto-close="outside" aria-expanded="false" data-bs-placement="right" title="Mais Ações">
+                                    <i class="fa-solid fa-ellipsis-vertical" style="color:#1968a4;"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center {% if solicitacao.checkin != "Checkin Pendente" %}desativado{% endif %}" {% if solicitacao.checkin == "Checkin Pendente" %}onclick="open_modal_checkin({{solicitacao.id}})"{% else %}onclick="bloqueio_modal()"{% endif %} >
+                                            <span>Checkin</span>
+                                            <span><i class="fa-regular fa-clipboard me-1"></i><span>
+                                        </a>    
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center {% if solicitacao.checkout != "Checkout Pendente" %}desativado{% endif %}" {% if solicitacao.checkout == "Checkout Pendente" %}onclick="open_modal_checkout({{solicitacao.id}})"{% else %}onclick="bloqueio_modal()"{% endif %} >
+                                            <span>Checkout</span>
+                                            <span><i class="fa-solid fa-clipboard me-1"></i><span>
+                                        </a>    
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center" onclick="verificar_implantacao({{solicitacao.id}}, '{{solicitacao.isca.numero_isca}}',{{solicitacao.isca.id}})" >
+                                            <span>Implantação</span>
+                                            <span><i class="fa-solid fa-box me-1"></i><span>
+                                        </a>    
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex justify-content-between align-items-center {% if solicitacao.implantacao == "Pendente" or solicitacao.viagem == "Iniciada" %}desativado{% endif %}" onclick="verificar_inicio_sm({{solicitacao.id}})" >
+                                            <span>Iniciar</span>
+                                            <span><i class="fa-solid fa-truck me-0"></i><span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+

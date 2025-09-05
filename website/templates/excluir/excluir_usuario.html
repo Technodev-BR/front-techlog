@@ -1,0 +1,25 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+
+    <h5 class="modal-title">Excluir Usuario</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <form id="excluir_usuarios_form" method='POST'>
+        {% csrf_token %}
+
+        <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary" onclick="excluir_usuarios()">Confimar</button>
+        </div>
+    </form>   
+
+{% endblock %}  

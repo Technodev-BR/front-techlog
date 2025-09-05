@@ -1,0 +1,53 @@
+/* monitor */
+@media screen and (max-width: 1440px){
+    footer div span{
+        font-size: 0.9rem !important;
+    }
+}
+
+/* desktop */
+@media screen and (max-width: 1080px){
+    main{
+        min-height: 93vh !important;
+    }
+    
+    footer{
+        min-height: 7vh !important;
+    }
+
+    footer div span{
+        font-size: 0.8rem !important;
+    }
+}
+
+/* tablet */
+@media screen and (max-width: 768px){
+    main{
+        min-height: 94vh !important;
+    }
+    
+    footer{
+        min-height: 6vh !important;
+    }
+
+    footer div span{
+        font-size: 0.7rem !important;
+    }
+}
+
+/* mobile */
+@media screen and (max-width: 480px){
+    
+    main{
+        min-height: 95vh !important;
+    }
+    
+    footer{
+        min-height: 5vh !important;
+    }
+
+    footer div span{
+        font-size: 0.6rem !important;
+    }
+
+}

@@ -1,0 +1,41 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block styles %} 
+    <link href="{% static 'css/tabela.css' %}" rel="stylesheet">
+    <link href="{% static 'css/rastreamento.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} {{ titulo_page }} {% endblock %}
+
+{% block conteudo %}
+
+    <Section class="py-4" > 
+        <div class="title-header d-flex flex-row justify-content-between align-items-center fundo-white">
+        
+            {% include 'bases/sub_titulo_base.html' %}
+
+            <div class="title-right">  
+                <button type="button" class="button-default button-finalizar-rastreio" onclick="verificar_rastreios_selecionados()">
+                    <i class="fa-solid fa-truck"></i><span class="ms-2">Finalizar</span> 
+                </button>
+            </div>
+        </div>
+        
+        {% include 'listar/rastreamento_list.html' %}
+
+    </section>
+
+    {% include 'bases/alerta_sucesso_base.html' %}
+    
+    {% include 'bases/alerta_erro_base.html' %}
+
+    {% with modal="excluir" controller="rastreamentos" %}
+        {% include 'excluir/excluir_rastreamento.html' %}
+    {% endwith %}
+
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/tabela.js' %}"></script>
+    <script src="{% static 'js/rastreamento.js' %}"></script>
+{% endblock %}

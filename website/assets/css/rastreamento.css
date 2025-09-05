@@ -1,0 +1,32 @@
+@import url("global/responsive.css");
+
+.selected-linha{
+    border: 2px solid #56924e;
+}
+
+.title-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+}
+.button-finalizar-rastreio{
+    border: 1px solid #df3030 !important;
+    background-color: #c62c2c;
+}
+.button-finalizar-rastreio:hover{
+    border: 1px solid #ba2525 !important;
+    background-color: #a72323;
+}
+@media screen and (max-width: 1080px){
+   
+}
+
+@media screen and (max-width: 768px){
+   
+}
+
+@media screen and (max-width: 480px){
+   
+
+}

@@ -1,0 +1,62 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Cadastrar Checkout</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{controller}}_body">
+        
+        {% csrf_token %}
+
+        <div class="alert alert-danger" id="cadastrar-error-checklists-checkout-generico" style="display:none;" role="alert">
+            <span id="cadastrar-error-checklists-checkout-generico-text"></span>
+        </div>
+
+        <div class="mt-2 px-3 row">
+            <button type="button" class="btn btn-light mb-2 " id="cadastrar-checklists-checkout-button_email"onclick="enviar_email_checkout('Checkout')">
+                <i class="fa-solid fa-envelope"></i><span class="ms-2">Solicitar checkout</span>
+            </button> 
+            <span class="cadastrar-error-checklists-checkout text-success text-center" id="cadastrar-error-checklists-checkout-email"></span>          
+        </div>
+        
+        <div class="row mt-2 m-0 p-0">
+            <div class="col-8 ps-0">
+                <label for="numero_isca">Numero da Isca</label><small style="color:red;">*</small>
+                <input  id="cadastrar-checklists-checkout-numero_isca" type="text" name="numero_isca" class="form-control" readonly>    
+            </div>
+
+            <div class="col-4 px-0">
+                <label for="id">Codigo</label><small style="color:red;">*</small>
+                <input type="text" name="id" class="form-control" id="cadastrar-checklists-checkout-id" readonly="readonly">
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label for="descricao">Observações</label>
+            <textarea type="text" name="descricao" class="form-control" id="cadastrar-checklists-checkout-descricao" rows="4" cols="50" >
+            </textarea>
+            <span class="cadastrar-error-checklists-checkout text-danger" id="cadastrar-error-checklists-checkout-descricao"></span>
+        </div>  
+
+        <div class="my-3">
+            <label for="resultado">Status</label><small style="color:red;">*</small>
+            <select name="resultado" class="form-control"  id="cadastrar-checklists-checkout-resultado" required>
+                <option value="">Selecione uma opção</option>
+                <option value="Aprovado">Aprovado</option>
+                <option value="Reprovado">Reprovado</option>
+            </select>
+            <span class="cadastrar-error-checklists-checkout text-danger" id="cadastrar-error-checklists-checkout-resultado"></span>    
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="cadastrar_checkout()">Confimar</button>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<section class="py-2 my-3 px-lg-2 fundo-white">
+    <div class="table-responsive mt-1 py-2 px-3">
+        <table class="table tabela-locais align-middle table-borderless">
+            <thead>
+                <tr class="align-bottom">
+                    <th data-orderable="false">Ativo</th>
+                    <th>Codigo</th>
+                    <th>Nome</th>
+                    <th>CEP</th>
+                    <th>Estado UF</th>
+                    <th>Cidade</th>
+                    <th>Data Criado</th>
+                    <th data-orderable="false">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if locais_list %}
+                    {% for local in locais_list %}
+                        <tr>
+                            <td>
+                                <button class="figure small pe-1">
+                                    <i class="fa-solid fa-circle" style="color: {% if local.ativo %}rgb(32, 218, 100);{% else %}#ba2525;{% endif %}"></i>
+                                </button>
+                            </td>
+                            <td>{{local.id | default:"N/A"}}</td>
+                            <td>{{local.nome | default:"N/A"}}</td>
+                            <td>{{local.cep | default:"N/A"}}</td>
+                            <td>{{local.estado_uf | default:"N/A"}}</td>
+                            <td>{{local.cidade | default:"N/A"}}</td>
+                            <td>{{local.data_criado | date:"d/m/Y" | default:"N/A" }}</td>
+                            <td>
+                                <button class="icone medium" data-bs-placement="right" title="Editar locais" onclick="modal_editar_locais({{ local.id }})" > 
+                                    <i class="fa-solid fa-pen-to-square" style="color: #1968a4;"></i>
+                                </button>
+                                <button class="icone medium" data-bs-placement="right" title="Excluir locais" onclick="modal_excluir_locais({{ local.id }})" >
+                                    <i class="fa-solid fa-trash" style="color: #df3030;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -1,0 +1,116 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Cadastrar Rastreamento</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick=" window.location.href = window.origin + '/solicitacoes/index'"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+            
+        <div class="alert alert-danger" id="cadastrar-error-rastreamentos-generico" style="display:none;" role="alert">
+            <span id="cadastrar-error-rastreamentos-generico-text"></span>
+        </div>
+
+        <article id="modal-foto-implantacao" style="display:none;">
+            <div id="modal-foto-implantacao-container">
+                <button type="button" class="btn-close btn-close-white " id="button-foto-close"onclick="fechar_video()"></button>
+                <div id="container-foto-implantacao">
+                    <video id="video-foto-implantacao" autoplay></video>
+                </div> 
+                <button type="button" class="button-default button-foto" onclick="tirar_foto()">
+                    <i class="fa-solid fa-camera"></i>
+                </button>           
+            </div>
+        </article>
+
+        <div class="mt-2 px-3 row">
+            <button type="button" class="btn btn-light mb-2 " id="cadastrar-rastreamentos-foto"onclick="abrir_camera()">
+                <i class="fa-solid fa-image"></i><span class="ms-2">Anexar foto</span>
+            </button> 
+            <span class="cadastrar-error-rastreamentos text-success text-center" id="cadastrar-error-rastreamentos-foto" style="color: red!important; display: none;text-align:center;">Camera não disponivel no dispositivo</span> 
+        </div>
+
+        <div class="mt-3">
+            <label for="isca">Numero Isca</label><small style="color:red;">*</small>
+            <input id="cadastrar-rastreamentos-isca" type="text" name="isca" class="form-control" readonly>        
+        </div>
+
+        <input id="cadastrar-rastreamentos-isca-id" type="text" name="isca-id" class="form-control" style="display:none;"readonly>
+        <div class="mt-3">
+            <label for="data_implantacao">Data da Implantação</label><small style="color:red;">*</small>
+            <input id="cadastrar-rastreamentos-data_implantacao" type="date" name="data_implantacao" class="form-control" readonly>    
+        </div>
+
+        <div class="mt-3">
+            <label for="data_saida">Data da Saida</label>
+            <input id="cadastrar-rastreamentos-data_saida" type="date" name="data_saida" class="form-control">    
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-data_saida"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="nota_fiscal">Numero da Nota Fiscal</label>
+            <input id="cadastrar-rastreamentos-nota_fiscal" type="text" name="nota_fiscal" class="form-control" placeholder="Digite a nota fiscal">    
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-nota_fiscal"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="motorista">Nome do Motorista</label>
+            <input id="cadastrar-rastreamentos-motorista" type="text" name="motorista" class="form-control" placeholder="Digite o motorista">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-motorista"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="placa">Numero da Placa</label>
+            <input id="cadastrar-rastreamentos-placa" type="text" name="placa" class="form-control" placeholder="Digite a placa">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-placa"></span>     
+        </div>
+        
+        <div class="mt-3">
+            <label for="rota_insercao">Rota da Inserção</label>
+            <input id="cadastrar-rastreamentos-rota_insercao" type="text" name="rota_insercao" class="form-control" placeholder="Digite a rota de inserção">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-rota_insercao"></span>     
+        </div>
+        
+        <div class="mt-3">
+            <label for="rota_maior_valor">Rota Maior Valor</label>
+            <input id="cadastrar-rastreamentos-rota_maior_valor" type="text" name="rota_maior_valor" class="form-control" placeholder="Digite a rota de maior valor">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-rota_maior_valor"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="valor_sm">Valor da SM</label>
+            <input id="cadastrar-rastreamentos-valor_sm" type="text" maxlength="13" name="valor_sm" class="form-control" placeholder="Digite um valor com ate duas casa depois da ponto">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-valor_sm"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="volume">Volume</label>
+            <input id="cadastrar-rastreamentos-volume" type="text" maxlength="13" name="volume" class="form-control" placeholder="Digite a quantidade do volume">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-volume"></span>     
+        </div>
+
+        <div class="mt-3">
+            <label for="manifesto">Numero do Manifesto</label>
+            <input id="cadastrar-rastreamentos-manifesto" type="text" name="manifesto" class="form-control" placeholder="Digite o manifesto">   
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-manifesto"></span>     
+        </div>
+
+        <div class="my-3">
+            <label for="sm">Numero da SM</label>
+            <input id="cadastrar-rastreamentos-sm" type="text" name="sm" class="form-control" placeholder="Digite a sm">    
+            <span class="cadastrar-error-rastreamentos text-danger" id="cadastrar-error-rastreamentos-sm"></span>     
+        </div>
+        
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" onclick=" window.location.href = window.origin + '/solicitacoes/index'">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="cadastrar_rastreamentos()">Confimar</button>
+    </div> 
+
+{% endblock %}

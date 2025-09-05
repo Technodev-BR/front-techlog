@@ -1,0 +1,60 @@
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block styles %} 
+    <link href="{% static 'css/tabela.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %} {{ titulo_page }} {% endblock %}
+
+{% block conteudo %}
+
+<Section class="py-4" > 
+
+    <div class="title-header d-flex flex-row justify-content-between align-items-center fundo-white">
+    
+        {% include 'bases/sub_titulo_base.html' %}
+        
+        <div class="title-right">
+            <button type="button" class="button-default" onclick="modal_cadastrar_clientes()"> 
+                <i class="fa-solid fa-plus"></i> <span class="mx-2">Cadastrar</span> 
+            </button>
+        </div>
+
+    </div>
+    
+    {% include 'listar/cliente_list.html' %}
+
+</section>
+
+    {% include 'bases/alerta_sucesso_base.html' %}
+
+    {% with modal="cadastrar" controller="clientes" %}
+        {% include 'cadastrar/cadastrar_cliente.html' %}
+    {% endwith %}
+
+    {% with modal="cadastrar" controller="operacoes" %}
+        {% include 'cadastrar/cadastrar_operacao.html' %}
+    {% endwith %}
+
+    {% with modal="editar" controller="clientes" %}
+        {% include 'editar/editar_cliente.html' %}
+    {% endwith %}
+
+    {% with modal="editar" controller="operacoes" %}
+        {% include 'editar/editar_operacao.html' %}
+    {% endwith %}
+
+    {% with modal="excluir" controller="clientes" %}
+        {% include 'excluir/excluir_cliente.html' %}
+    {% endwith %}
+
+    {% with modal="excluir" controller="operacoes" %}
+        {% include 'excluir/excluir_operacao.html' %}
+    {% endwith %}
+
+{% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/tabela.js' %}" ></script>
+    <script src="{% static 'js/cliente.js' %}" ></script>
+{% endblock %}

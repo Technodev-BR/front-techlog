@@ -1,0 +1,19 @@
+{% block modal_base %}
+    <div class="modal fade" id="{{modal}}_{{controller}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="{{modal}}_{{controller}}_label" aria-hidden="true">
+        
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    {% block modal_header %}{% endblock %}
+                </div>
+
+                {% block modal_body %}{% endblock %}                  
+
+            </div>
+
+        </div>
+        
+    </div>
+{% endblock %}

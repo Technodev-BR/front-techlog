@@ -1,0 +1,68 @@
+<section class="py-2 my-3 px-lg-2 fundo-white">
+    <div class="table-responsive mt-1 py-2 px-3">
+        <table class="table tabela-rastreamentos align-middle table-borderless" >
+            <thead>
+                <tr class="align-bottom">
+                    <th data-orderable="false"></th>
+                    <th>Numero SM</th>
+                    <th>Nota Fiscal</th>
+                    <th>Numero Isca</th>
+                    <th>Rota Inserção</th>
+                    <th>Rota Maior Valor</th>
+                    <th>Resultado</th>
+                    <th>Valor SM</th>
+                    <th>Volume</th>
+                    <th>Motorista</th>
+                    <th>Placa</th>
+                    <th>Manifesto</th>
+                    <th>Data Implantada</th>
+                    <th>Data Saida</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if rastreamentos_list %}
+                    {% for rastreamento in rastreamentos_list %}
+                        <tr>
+                            <td >
+                                <input type="checkbox" id="checkbox-rastreamento" name="checkbox-rastreamento" value="{{rastreamento.id}}">
+                            </td>
+                            <td>
+                                <button class="figure pe-1">
+                                    <i class="fa-solid fa-truck" style="color: {% if rastreamento.ativo %}#2caf46;{% else %}#ba2525;{% endif %}"></i>
+                                </button>
+                                <button class="text-reduzido">
+                                    {{rastreamento.sm | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>{{rastreamento.nota_fiscal | default:"N/A"}}</td>
+                            <td>
+                                <button class="text-reduzido">
+                                    {{rastreamento.isca.numero_isca | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>{{rastreamento.rota_insercao | default:"N/A"}}</td>
+                            <td>{{rastreamento.rota_maior_valor | default:"N/A"}}</td>
+                            <td>
+                                <button class="figure small pe-1">
+                                    <i class="fa-solid fa-circle" style="color: {% if rastreamento.resultado == "Em viagem" %}rgb(32, 218, 100);{% elif rastreamento.resultado == "Implantada" %}goldenrod;{% else %}#ba2525;{% endif %}"></i>
+                                </button>
+                                <button class="text status ps-0">
+                                    {{rastreamento.resultado | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>R$ {{rastreamento.valor_sm | default:"N/A"}}</td>
+                            <td>{{rastreamento.volume | default:"N/A"}}</td>
+                            <td>{{rastreamento.motorista | default:"N/A"}}</td>
+                            <td>{{rastreamento.placa | default:"N/A" }}</td>
+                            <td>{{rastreamento.manifesto | default:"N/A"}}</td>
+                            <td>{{rastreamento.data_implantacao | date:"d/m/Y" | default:"N/A" }}</td>
+                            <td>{{rastreamento.data_saida | date:"d/m/Y" | default:"N/A" }}</td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+

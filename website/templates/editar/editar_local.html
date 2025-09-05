@@ -1,0 +1,80 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Editar Local</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{controller}}_body">
+        {% csrf_token %}
+        <div class="alert alert-danger" id="editar-error-locais-generico" style="display:none;" role="alert">
+            <span id="editar-error-locais-generico-text"></span>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-7" id="form-editar-locais">
+                <div class="row mt-2 m-0 p-0">
+                    <div class="col-8 ps-0">
+                        <label for="nome">Nome</label><small style="color:red;">*</small>
+                        <input type="text" name="nome" autocomplete="off" class="form-control" id="editar-locais-nome" placeholder="digite um nome">
+                        <span class="editar-error-locais text-danger" id="editar-error-locais-nome"></span>
+                    </div>
+
+                    <div class="col-4 px-0">
+                        <label for="id">Codigo</label><small style="color:red;">*</small>
+                        <input type="text" name="id" class="form-control" id="editar-locais-id" readonly="readonly">
+                    </div>
+                </div>
+
+                <div class="mt-3">
+                    <label for="cep">CEP</label>
+                    <input type="text" name="cep" class="form-control" id="editar-locais-cep" placeholder="digite um CEP">
+                    <span class="editar-error-locais text-danger" id="editar-error-locais-cep"></span>
+                </div>  
+
+                <div class="mt-3">
+                    <label for="uf">Estado UF</label>
+                    <input type="text" name="cep" class="form-control" id="editar-locais-estado_uf" placeholder="digite um UF ex: SP">
+                    <span class="editar-error-locais text-danger" id="editar-error-locais-estado_uf"></span>
+                </div>
+
+                <div class="mt-3">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" name="cidade" class="form-control" id="editar-locais-cidade" placeholder="digite uma cidade">
+                    <span class="editar-error-locais text-danger" id="editar-error-locais-cidade"></span>
+                </div>
+
+                <div class="my-3">
+                    <label for="rua">Rua</label>
+                    <input type="text" name="rua" class="form-control" id="editar-locais-rua" placeholder="digite uma rua" >
+                    <span class="editar-error-locais text-danger" id="editar-error-locais-rua"></span>
+                </div> 
+            </div>
+
+            <div class="form-group ps-0 pe-2 col-5" id="editar-list-locais-cliente" >
+                <h5 class="mb-0">Clientes</h5>
+
+                <div class="mb-2">
+                    <button type="button" class="btn btn-outline-secondary form-control mt-2" style="font-size:.9rem;" onclick="modal_adicionar_locais_clientes()">
+                        <i class="fa-solid fa-plus"></i><span class="ms-2">Adicionar Cliente</span>
+                    </button>
+                </div>
+
+                <ul class="list-group" style="max-height: 35vh !important; overflow-y: auto;">
+                </ul>
+                
+                <input type="text" id="editar-locais-clientes_list" style="display:none;">
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="editar_locais()">Confimar</button>
+    </div> 
+
+{% endblock %}

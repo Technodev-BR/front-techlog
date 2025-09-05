@@ -1,0 +1,41 @@
+<section class="py-2 my-3 px-lg-2 fundo-white">
+    <div class="table-responsive mt-1 py-2 px-3">
+        <table class="table tabela-usuarios align-middle table-borderless">
+            <thead>
+                <tr class="align-bottom">
+                    <th>Codigo</th>
+                    <th>Nome</th>
+                    <th>Nivel de Acesso</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Data Criado</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if usuarios_list %}
+                    {% for usuario in usuarios_list %}
+                        <tr>
+                            <td scope="col">{{usuario.id | default:"N/A"}}</td>
+                            <td scope="col">{{usuario.user.username | default:"N/A"}}</td>
+                            <td scope="col">{{usuario.roles | default:"N/A"}}</td>
+                            <td scope="col">{{usuario.email | default:"N/A"}}</td>
+                            <td scope="col">{{usuario.telefone | default:"N/A"}}</td>
+                            <td scope="col">{{usuario.data_criado | date:"d/m/Y" | default:"N/A" }}</td>
+                            <td>
+                                <button class="icone medium" data-bs-placement="right" title="Editar usuarios" onclick="modal_editar_usuarios({{ usuario.id }})" > 
+                                    <i class="fa-solid fa-pen-to-square" style="color: #1968a4;"></i>
+                                </button>
+                                <button class="icone medium" data-bs-placement="right" title="Excluir usuarios" onclick="modal_excluir_usuarios({{ usuario.id }})" >
+                                    <i class="fa-solid fa-trash" style="color: #df3030;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+

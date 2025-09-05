@@ -1,0 +1,63 @@
+<section class="py-2 my-3 px-lg-2 fundo-white">
+    <div class="table-responsive mt-1 py-2 px-3">
+        <table class="table tabela-iscas align-middle table-borderless">
+            <thead>
+                <tr class="align-bottom">
+                    <th data-orderable="false"></th>
+                    <th>Numero</th>
+                    <th>Fornecedor</th>
+                    <th>Comunicação</th>
+                    <th>Modelo</th>
+                    <th>Status</th>
+                    <th>local</th>
+                    <th>Cliente</th>
+                    <th>Operação</th>
+                    <th>Data Criado</th>
+                    <th data-orderable="false">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if iscas_list %}
+                    {% for isca in iscas_list %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkbox-isca" value="{{isca.id}}">
+                            </td>
+                            <td>
+                                <button class="figure pe-1">
+                                    <i class="fa-solid fa-tower-broadcast" style="color: {% if isca.ativo %}#2caf46;{% else %}#ba2525;{% endif %}"></i>
+                                </button>
+                                <button class="text-reduzido">
+                                    {{isca.numero_isca | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>{{isca.fornecedor.nome | default:"N/A"}}</td>
+                            <td>{{isca.comunicacao | default:"N/A"}}</td>
+                            <td>{{isca.modelo | default:"N/A"}}</td>
+                            <td>
+                                <button class="figure small">
+                                    <i class="fa-solid fa-circle" style="color: {% if isca.status == "Almoxarifado" %}rgb(32, 218, 100);{% else %}goldenrod;{% endif %}"></i>
+                                </button>
+                                <button class="text status">
+                                    {{isca.status | default:"N/A"}}
+                                </button>
+                            </td>
+                            <td>{{isca.local_cliente.local.nome | default:"N/A"}}</td>
+                            <td>{{isca.operacao.cliente.razao_social | default:"N/A"}}</td>
+                            <td>{{isca.operacao.nome | default:"N/A"}}</td>
+                            <td>{{isca.data_criado | date:"d/m/Y" | default:"N/A"}}</td>
+                            <td>
+                                <button class="icone medium" data-bs-placement="right" title="Editar isca" onclick="modal_editar_iscas({{ isca.id }})" > 
+                                    <i class="fa-solid fa-pen-to-square" style="color: #1968a4;"></i>
+                                </button>
+                                <button class="icone medium" data-bs-placement="right" title="Excluir isca" onclick="modal_excluir_iscas({{ isca.id }})" >
+                                    <i class="fa-solid fa-trash" style="color: #df3030;"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</section>

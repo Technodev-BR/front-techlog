@@ -1,0 +1,238 @@
+@import url("responsive.css");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+:root{
+    --fundo:#fff;
+    --sombra: #f3f3f39b;
+}
+*, ::before, ::after{
+    box-sizing: border-box;
+    outline: none;
+}
+::-webkit-scrollbar{
+    background: rgb(121, 121, 121);
+    width: 7px;
+    height: 7px;
+}
+::-webkit-scrollbar-thumb{
+    background: rgb(46, 48, 46);
+}
+::-webkit-scrollbar-thumb:hover{
+    background: rgb(24, 24, 24);
+}
+body{
+    font-family: "Nunito",sans-serif;
+}
+
+main{
+    min-height: calc(90vh - 2rem) !important;
+} 
+.container_alerta{
+    right: -100%;
+    bottom: 10px;
+    position: fixed;
+}
+.mostrar_alerta{
+    animation: slide 5s ease-out;
+}
+.alerta_erro{
+    padding: 12px 15px;
+    border-radius: 4px;
+    width: max-content;
+    font-size: 1rem;
+    color: #ffffff;
+    align-items: center;
+    gap: 35px;
+    justify-content: space-between;
+    display: flex;
+    background-color: #9e3e3e;
+}
+.alerta_sucesso{
+    padding: 12px 15px;
+    border-radius: 4px;
+    width: max-content;
+    font-size: 1rem;
+    color: #ffffff;
+    align-items: center;
+    gap: 35px;
+    justify-content: space-between;
+    display: flex;
+    background-color: #449759;
+}
+.modal-content{
+    max-height: 85vh !important;
+    overflow-y: auto!important;
+    overflow-x: hidden!important;
+}
+.title-header{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    padding: .5rem 1.8rem 1rem 1.8rem;
+}
+
+.sub-title-header a{
+    font-size: .9rem !important;
+    color: #909090 !important;
+    margin: 1rem 0 0.5rem 0rem !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    text-transform: capitalize !important;
+    cursor: pointer;
+}
+.sub-title-header a:hover{
+    text-decoration: underline !important;
+}
+.sub-title-header h2{
+    margin: 0.5rem 0rem 1.3rem 2rem;
+    color: #454545;
+    font-size: 2.2rem;
+    text-transform:capitalize;
+    font-weight: 400;
+}
+.button-default{
+    background-color: #2eab4d;
+    border: 2px solid rgb(70, 198, 102);
+    color:white;
+    padding:.4em .5em;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+    display:inline-block;
+    width: auto;
+    transition: all .6s;
+    cursor: pointer;
+}
+.button-base{
+    font-weight: 500 !important;
+    font-size: .8em !important;
+    border-radius: 4px !important;
+    padding:.4em .5em !important;
+    display:inline-block !important;
+    width: auto !important;
+    transition: all .5s ease-out !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.button-csv{
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+    color:  #1aa438 !important;
+    letter-spacing: -1px !important;
+    border: 3px solid  #2d833f !important;
+}
+
+.button-pdf{
+    letter-spacing: -1px !important;
+    box-shadow: none !important;
+    background-color: var(--fundo) !important;
+    color: #c54444 !important;
+    border: 3px solid  #8d0d0d !important;
+}
+.button-csv:hover{
+    background-color: #2d833f!important;
+    border-color: transparent!important;
+    color:var(--fundo) !important;
+}
+.button-pdf:hover{
+    background-color: #8d0d0d!important;
+    border-color: transparent!important;
+    color: var(--fundo) !important;
+}
+
+.button-default svg{
+    font-size: 18px;
+}
+.button-default:hover{
+    background-color: #158637;
+    border-color: transparent;
+    
+}
+.fundo-white{
+    background-color: var(--fundo);
+    border-radius: 4px;
+}
+footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 6vh !important;
+}
+footer div span{
+    font-weight: 400;
+    cursor: grab;
+    font-size: 0.8rem !important;
+    transition: color .5s ease-out;
+    text-align: center;
+}
+footer div span:hover{
+    color:rgb(103, 163, 98)!important;
+    font-weight: 600;
+}
+
+
+.table-responsive {
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-width: 1080px){
+   
+    .title-header{
+        padding: .5rem 1.6rem 1rem 1.6rem !important;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .title-header{
+        padding: .4rem 1.2rem 1rem 1.2rem !important;
+    }
+    .sub-title-header a{
+        font-size: 0.7rem !important;
+    }
+    .sub-title-header h2{
+        margin: 0.5rem 0rem 1rem 0rem !important;
+        font-size: 1.9rem !important;
+    }
+    .button-base{
+        font-size: .7em !important;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .button-default{
+        font-size: 12px!important;
+    }
+    .button-default svg{
+        font-size: 10px!important;
+    }
+    .title-header{
+        padding: .4rem .9rem .5rem .9rem !important;
+    }
+    .sub-title-header h2{
+        font-size: 1.6rem !important;
+    }
+}
+
+
+@keyframes slide {
+    0% {
+        right: -100%;
+    }
+    
+    20%{
+        right: 8px;
+    }
+
+    85%{
+        right: 8px;
+    }
+
+    100% {
+        right: -100%;
+    }
+}

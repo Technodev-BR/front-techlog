@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta name="author" content="J&C - GESTÂO DE RISCO">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="J&C, Logistica, Serviços, Gestão de Riscos, Inteligência">
+    <meta name="copyright" content="© 2024 Companhia J&C Gestão de Riscos" />
+    <meta http-equiv="content-language" content="pt-br, en-US, fr" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="pragma" content="no-cache" /> 
+
+    <!-- Bootstrap -->
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="{% static 'lib/jquery/jquery.js' %}" ></script>
+    <link href="{% static 'lib/datatables/datatables.css' %}" rel="stylesheet">
+    <script src="{% static 'lib/datatables/datatables.js' %}"></script>
+
+    <!-- FontAwesomeFree Css -->
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/regular.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+       
+    <!-- Css -->
+    <link href="{% static 'css/siderbar.css' %}" rel="stylesheet">
+    <link href="{% static 'css/global/default.css' %}" rel="stylesheet">
+   
+    {% block styles %}{% endblock styles %}
+    <title>Controle de Iscas - {% block title %} {% endblock title %}</title>
+    
+</head>
+
+<body class="body-pd" style="background-color: #F7F6FB;" id="body-pd">
+
+    <!-- Header -->
+    <header class="header body-pd" id="header">
+
+        <div class="header_toggle bx-x" id="header-toggle"> 
+            <i class="fa-solid fa-bars" ></i>
+        </div>
+
+        {% if context_usuarios %}
+            <div class="header_img_content"> 
+                
+                <div class="header_img"> 
+                    <img src="{{ context_usuarios.foto }}" alt="logado"> 
+                </div>
+
+                <h3>{{ context_usuarios.user.username }}</h3>
+            </div>
+        {% endif %}
+
+    </header>
+
+    <!-- Navbar -->
+    <div class="l-navbar expansive" id="nav-bar">
+        <nav class="nav">
+            <article> 
+                
+                <div class="logo_img"> 
+                  
+                    
+                </div>
+                    
+                <a href="{% url 'home' %}" class="nav_logo item-logo"> 
+                    <i class="fa-solid fa-cart-flatbed-suitcase"></i>
+                    <span class="nav_logo-name">Controle de Iscas</span> 
+                </a>
+
+                <hr>
+                
+                <div class="nav_list"> 
+
+                    <a href="{% url 'iscas:index' %}" class="nav_link item {% if nav_isca %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Invetario de iscas"> 
+                        <i class="fa-solid fa-box-archive"></i>
+                        <span class="nav_name">Invetario de iscas</span> 
+                    </a> 
+
+                    <a href="{% url 'solicitacoes:index' %}" class="nav_link item {% if nav_solicitacao %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Solicitações de Check-in/out"> 
+                        <i class="fa-solid fa-clipboard-check"></i>
+                        <span class="nav_name">Solicitações Check-in/out</span> 
+                    </a> 
+
+                    <a href="{% url 'rastreamentos:index' %}" class="nav_link item {% if nav_rastreamento %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Rastreamento de iscas"> 
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span class="nav_name">Rastreamentos iscas</span> 
+                    </a> 
+                    
+                    {% if context_usuarios.roles == ROLES.ADMINISTRADOR or context_usuarios.roles == ROLES.SUPERVISOR %}
+                        <a href="{% url 'locais:index' %}" class="nav_link item {% if nav_local %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Locais"> 
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span class="nav_name">Locais</span> 
+                        </a>
+                    {% endif %}
+
+                    
+                    {% if context_usuarios.roles == ROLES.ADMINISTRADOR or context_usuarios.roles == ROLES.SUPERVISOR %}
+                        <a href="{% url 'clientes:index' %}" class="nav_link item {% if nav_cliente %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Clientes"> 
+                            <i class="fa-solid fa-users"></i>
+                            <span class="nav_name">Clientes</span> 
+                        </a>
+                    {% endif %}
+
+                    {% if context_usuarios.roles == ROLES.ADMINISTRADOR or context_usuarios.roles == ROLES.SUPERVISOR %}
+                        <a href="{% url 'fornecedores:index' %}" class="nav_link item {% if nav_fornecedor %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Fornecedores"> 
+                            <i class="fa-solid fa-boxes-packing"></i>
+                            <span class="nav_name">Fornecedores</span> 
+                        </a>
+                    {% endif %}
+                    
+                    {% if context_usuarios.roles == ROLES.ADMINISTRADOR or context_usuarios.roles == ROLES.SUPERVISOR %}
+                        <a href="{% url 'usuarios:index' %}" class="nav_link item {% if nav_usuario %}active{% endif %}" data-bs-toggle="tooltip" data-bs-placement="right" title="Usuarios"> 
+                            <i class="fa-solid fa-image-portrait"></i>
+                            <span class="nav_name">Usuarios</span>
+                        </a> 
+                    {% endif %}
+             
+                </div>
+
+            </article> 
+           
+            <article>
+
+                <hr>
+
+                <a href="{% url 'logout' %}" class="nav_link item" data-bs-toggle="tooltip" data-bs-placement="right" title="Encerrar de Sessão"> 
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span class="nav_name">Encerrar Sessão</span> 
+                </a>
+
+            </article>
+        </nav>
+    </div>
+
+    <!-- main -->
+    <main>
+        {% block conteudo %}
+
+        {% endblock conteudo %}
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container d-flex justify-content-center align-content-center">
+            <!-- <span>© 2024 Companhia&nbsp;J&amp;C Gestão de Riscos</span> -->
+        </div>
+    </footer>
+
+    <!-- js -->
+    <script src="{% static 'js/siderbar.js' %}"></script>
+    {% block scripts %}{% endblock scripts %}
+</body>

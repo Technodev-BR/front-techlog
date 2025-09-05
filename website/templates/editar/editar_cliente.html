@@ -1,0 +1,104 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Editar Cliente</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+
+        <div class="alert alert-danger" id="editar-error-clientes-generico" style="display:none;" role="alert">
+            <span id="editar-error-clientes-generico-text"></span>
+        </div>
+             
+        <div class="row">
+            <div class="form-group col-7" id="form-editar-clientes">
+                <div class="row mt-2 m-0 p-0">
+                    <div class="col-8 ps-0">
+                        <label for="nome">Nome</label><small style="color:red;">*</small>
+                        <input type="text" name="nome" autocomplete="off" id="editar-clientes-nome_fantasia" class="form-control" placeholder="digite um nome" >
+                        <span class="editar-error-clientes text-danger" id="editar-error-locais-nome"></span>
+                    </div>
+
+                    <div class="col-4 px-0">
+                        <label for="id">Codigo</label><small style="color:red;">*</small>
+                        <input type="text" name="id" class="form-control" id="editar-clientes-id" readonly="readonly" >
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <label for="razao_social">Razão Social</label><small style="color:red;">*</small>
+                    <input type="text" name="razao_social" class="form-control" id="editar-clientes-razao_social" placeholder="digite uma razao_social">
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-razao_social"></span>
+                </div>  
+
+                <div class="mt-3">
+                    <label for="cnpj">CNPJ</label><small style="color:red;">*</small>
+                    <input type="text" name="cnpj" class="form-control"  id="editar-clientes-cnpj" maxlength="18" placeholder="digite um cnpj">
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-cnpj"></span>
+                </div>
+
+                <div class="mt-3">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" name="telefone" class="form-control"  id="editar-clientes-telefone" placeholder="digite um telefone">
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-telefone"></span>
+                </div>
+
+                <div class="mt-3">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="form-control"  id="editar-clientes-email" placeholder="digite um email" >
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-email"></span>
+                </div>
+
+                <div class="mt-3 form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="editar-clientes-recebe_email">
+                    <label class="form-check-label" for="editar-clientes-recebe_email">Recebe email</label>
+                </div>
+
+                <div class="mt-3">
+                    <label for="uf">Estado UF</label>
+                    <input type="text" name="uf" class="form-control"  id="editar-clientes-uf" placeholder="digite um UF de estado ex SP.. " >
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-uf"></span>
+                </div>
+
+                <div class="mt-3">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" name="cep" class="form-control mt-2" id="editar-clientes-cidade" placeholder="digite uma cidade" >
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-cidade"></span>
+                </div>
+
+                <div class="my-3">
+                    <label for="rua">Rua</label>
+                    <input type="text" name="rua" class="form-control" id="editar-clientes-rua" placeholder="digite uma rua" >
+                    <span class="editar-error-clientes text-danger" id="editar-error-clientes-rua"></span>
+                </div>
+            </div>
+
+            <div class="form-group ps-0 pe-2 col-5" id="editar-list-operacoes">
+                <h5 class="mb-0">Operações</h5>
+                
+                <div class="mb-2">
+                    <button type="button" class="btn btn-outline-secondary form-control mt-2" style="font-size:.9rem;" onclick="modal_cadastrar_operacoes()">
+                        <i class="fa-solid fa-plus"></i><span class="ms-2">Cadastrar Operação</span>
+                    </button>
+                </div>
+
+                <ul class="list-group" style="max-height: 65vh !important; overflow-y: auto;">  
+                </ul>
+
+                <input type="text" id="editar-clientes-operacoes_list" style="display:none;">
+            </div>
+        </div>
+    </div>
+         
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="editar_clientes()">Confimar</button>
+    </div> 
+    
+{% endblock %}

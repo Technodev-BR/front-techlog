@@ -1,0 +1,31 @@
+{% extends 'bases/modal_base.html' %}
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Escoha o cliente para ser adicionado</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3">
+        {% csrf_token %}
+        <div class="my-3">
+            <label for="cliente">Cliente</label><small style="color:red;">*</small>
+            <select name="cliente" id="adicionar-locais-clientes-text" class="form-control" >
+                <option value="">Selecione uma opção</option>
+                {% for cliente in context_clientes %}
+                    <option value="{{cliente.id}}">Codigo: {{cliente.id}} | Nome: {{ cliente.nome_fantasia }}</option>
+                {% endfor %}
+            </select>
+            <span class="text-danger" id="adicionar-error-locais_clientes"></span>
+        </div>
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="adicionar_locais_clientes()">Confimar</button>
+    </div>
+
+{% endblock %}

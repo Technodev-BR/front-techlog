@@ -1,0 +1,35 @@
+{% extends 'bases/modal_base.html' %}error
+
+{% block modal_header %}
+    
+    <h5 class="modal-title">Deseja realmente remover a operação ?</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+{% endblock %}
+
+{% block modal_body %}
+
+    <div class="modal-body form-group py-3" id="{{modal}}_{{request.resolver_match.app_name}}_body">
+        {% csrf_token %}
+        <div class="alert alert-danger" id="excluir-error-operacoes-generico" style="display:none;" role="alert">
+            <span id="excluir-error-operacoes-generico-text"></span>
+        </div>
+
+        <div class="row my-3 m-0 p-0">
+            <div class="col-8 ps-0">
+                <label for="informacao">Informações da operação</label>
+                <input type="text" name="informacao" autocomplete="off" id="excluir-operacoes-informacao" class="form-control" readonly="readonly" >
+            </div>
+            <div class="col-4 px-0">
+                <label for="operacao_id">Codigo Operação</label>
+                <input type="text" name="operacao_id" class="form-control" id="excluir-operacoes-operacao_id" readonly="readonly" >
+            </div>
+        </div>
+    </div>
+       
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" onclick="excluir_operacoes()">Confimar</button>
+    </div> 
+
+{% endblock %}
