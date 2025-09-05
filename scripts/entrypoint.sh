@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Coletar arquivos estáticos
-# python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput
 
 # Criar migrações e aplicar
 python manage.py makemigrations --noinput

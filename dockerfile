@@ -19,7 +19,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY ./website /website
-COPY ./entrypoint.sh /scripts
+COPY ./scripts /scripts
 
 WORKDIR /website
 
